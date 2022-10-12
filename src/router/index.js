@@ -1,19 +1,35 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'infoView',
+    component: () => import(/* webpackChunkName: "about" */ '../views/InfoView.vue')
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/mascotas',
+    name: 'mascotas',
+    component: () => import(/* webpackChunkName: "about" */ '../views/MascotasView.vue')
+  },
+  {
+    path: '/clientes',
+    name: 'clientes',
+    component: () => import(/* webpackChunkName: "about" */ '../views/ClientesView.vue')
+  },
+  {
+    path: '/adopcion/:id',
+    name: 'adopcion',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AdopcionView.vue')
+  },
+  {
+    path: '/detalle/:id',
+    name: 'detalle',
+    component: () => import(/* webpackChunkName: "about" */ '../views/DetalleView.vue')
+  },
+  {
+    path: '/formCreatePet',
+    name: 'formCreatePet',
+    component: () => import(/* webpackChunkName: "about" */ '../views/FormCreatePetView.vue')
   }
 ]
 
