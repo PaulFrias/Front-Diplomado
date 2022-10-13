@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  var TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJkNjY2ZjlkYS0yNjgxLTQ3NDYtYTIyZi0zY2U4ODY2OGY2YjAiLCJpYXQiOjE2NjU1OTI2NDksImV4cCI6MTY2NTY3OTA0OX0.9PlyrD7VPhlF_AsyqByR_M7xXut7VVhlQ9RoYH65rtM"
+  let login = localStorage.getItem("jwt") ;
 import PetCard from '@/components/PetCard.vue'
 export default {
     name: 'app',
@@ -27,7 +27,7 @@ export default {
           method: "GET",
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer '+ TOKEN
+            'Authorization': 'Bearer '+ login
           },
         });
         this.mascotas = await respuesta.json();

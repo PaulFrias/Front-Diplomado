@@ -47,7 +47,7 @@
 
 
 <script>
-  var TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJkNjY2ZjlkYS0yNjgxLTQ3NDYtYTIyZi0zY2U4ODY2OGY2YjAiLCJpYXQiOjE2NjU1MDU0NjksImV4cCI6MTY2NTU5MTg2OX0.Lth_ma5jSZWP6s-vzw6GDxkZvQh58lexqKFjlkGoOAo";
+let login = localStorage.getItem("jwt")  
 export default {
     name: 'app',
     data() {
@@ -62,7 +62,7 @@ export default {
           method: "GET",
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer '+ TOKEN
+            'Authorization': 'Bearer '+ login
           },
         });
         this.clientes = await respuesta.json();
