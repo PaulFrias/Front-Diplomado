@@ -10,14 +10,15 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Inicio</a>
           </li>
-          <li class="nav-item">
+          <li v-if="isLoggin" class="nav-item">
             <a class="nav-link" href="/mascotas">Mascotas</a>
           </li>
-          <li class="nav-item">
+          <li v-if="isLoggin" class="nav-item">
             <a class="nav-link" href="/clientes">Clientes</a>
-          </li>
-        </ul>
+          </li>          
+        </ul>        
       </div>
+      <router-link v-if="isLoggin" to="/login" @click="handleLogout" class="nav-link"> Salir   </router-link>
     </div>
   </nav>
 </template>
@@ -25,7 +26,27 @@
 <script>
   export default {
     name: 'BarnavHome',
+    data(){
+      let isLoggin = false
+    return {
+      isLoggin
+    }    
+  },
+  methods:{
+    isLogged(){
+      let login = localStorage.getItem("jwt")      
+      if(login != null){     
+        this.isLoggin = true        
+      }
+    },
+    handleLogout(){
+      localStorage.removeItem('jwt');      
+    }        
+  },
+  mounted(){
+    this.isLogged()
   }
+  }  
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <BarnavHome/>
+    <BarnavHome :key="$route.fullPath"/>
     <router-view/>
     <FooterPets/>
   </div>
