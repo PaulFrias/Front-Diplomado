@@ -25,17 +25,16 @@
         <div class="mb-3 form-check">
           <label class="form-label">Raza</label>
           <select class="form-select" @click="getBreeds(typeSeleccionado)" id="breedPet" >
-            <option selected aria-placeholder="Seleccione Especie primero">Seleciona</option>
             <option :value="breed.id" v-for="breed in breeds" :key="breed.id"> {{ breed.name }} </option>
           </select>
         </div>
         <div class="row">
-          <div class="col">
+          <div class="col-md-4">
             <button class="btn btn-primary" @click="createPet()">Enviar</button>
           </div>
-          <div class="col"></div>
-          <div class="col">
-            <button type="reset" class="btn btn-primary">Borrar</button>
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <button type="reset" class="btn btn-primary">Reset</button>
           </div>   
         </div>    
       </form>
@@ -45,7 +44,7 @@
 
 <script>
 
-var TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJkNjY2ZjlkYS0yNjgxLTQ3NDYtYTIyZi0zY2U4ODY2OGY2YjAiLCJpYXQiOjE2NjU1OTI2NDksImV4cCI6MTY2NTY3OTA0OX0.9PlyrD7VPhlF_AsyqByR_M7xXut7VVhlQ9RoYH65rtM"
+var TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJkNjY2ZjlkYS0yNjgxLTQ3NDYtYTIyZi0zY2U4ODY2OGY2YjAiLCJpYXQiOjE2NjU2MjYyMTAsImV4cCI6MTY2NTcxMjYxMH0.ijGtrmh4XJtd9uDRL7SfXl4JbSKzXNCUFOY_z0ZZIEU"
   export default {
     name: 'app',
     data() {
@@ -53,6 +52,7 @@ var TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJkNjY2ZjlkYS0yNjgxLT
         types:[],
         typeSeleccionado: {},
         breeds:[],
+        res: [],
       }
     },
     methods: {
@@ -85,7 +85,17 @@ var TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJkNjY2ZjlkYS0yNjgxLT
         console.log(error);
         }
       },
-      async createPet(name, description, image, typeId, breedId) {
+      async createPet() {
+      let name = document.getElementById("namePet").value ;
+      let description= document.getElementById("descripcionPet").value ;
+      let image = document.getElementById("imagePet").value ;
+      let typeId = document.getElementById("typePet").value ;
+      let breedId = document.getElementById("breedPet").value ;
+      /*alert(name + 
+                  description +
+                  image +
+                  typeId +
+                  breedId );*/
       try {
         const respuesta = await fetch("http://localhost:3000/pet", {
           method: "POST",
@@ -101,8 +111,10 @@ var TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJkNjY2ZjlkYS0yNjgxLT
             "breedId": breedId
           }
         });
-        this.type = await respuesta.json();
+        this.res = await respuesta.json();
+        alert('Mascota Agregada correctamente');
         } catch (error) {
+          alert(error);
         console.log(error);
         }
       }
@@ -113,7 +125,4 @@ var TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJkNjY2ZjlkYS0yNjgxLT
   }
 </script>
 <style scoped>
-.cardForm{
-  
-}
 </style>
