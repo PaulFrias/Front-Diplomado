@@ -39,9 +39,9 @@ export default {
   mounted() {
     this.getMascotas();
   },
-    components: {
-      PetCard
-    }
+  components: {
+    PetCard
+  }
   }
 </script>
 <style scoped>

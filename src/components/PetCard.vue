@@ -15,7 +15,7 @@
               <div class="col">
               </div>
               <div class="col">
-                <router-link :to="'/adopcion/'+mascota.id" class="btn btn-primary">Adoptar</router-link>
+                <ModalAdoptPet :mascota="mascota"/>
               </div>
             </div>
           </div>
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import ModalAdoptPet from '@/components/ModalAdoptPet.vue'
 export default {
   name: 'PetCard',
   props: {
@@ -37,6 +38,9 @@ export default {
       editando: null,
     };
   },
+  components: {
+    ModalAdoptPet
+  }
 }
 </script>
 

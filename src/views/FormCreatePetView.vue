@@ -21,12 +21,14 @@
           <select class="form-select" v-model="pet.typeId" id="typePet">
             <option id="optionTypeValue" v-for="type in types" :key="type.id" :value="type.id"> {{ type.name }} </option>
           </select>
+          <ModalType />
         </div>
         <div class="mb-3 form-check">
           <label class="form-label">Raza</label>
           <select class="form-select" @click="getBreeds(pet.typeId)" id="breedPet" v-model="pet.breedId">
             <option :value="breed.id" v-for="breed in breeds" :key="breed.id"> {{ breed.name }} </option>
           </select>
+          <ModalBreed :types="types"/>
         </div>
         <div class="row">
           <div class="col-md-4">
@@ -43,6 +45,8 @@
 </template>
 
 <script>
+import ModalType from '@/components/ModalType.vue'
+import ModalBreed from '@/components/ModalBreed.vue'
 import axios from "axios";
 let login = localStorage.getItem("jwt"); 
 let config = {
@@ -52,7 +56,7 @@ let config = {
   }
 }
   export default {
-    name: 'app',
+    name: 'formCreatePetView',
     data() {
       return {
         types:[],
@@ -110,11 +114,15 @@ let config = {
           alert(error)        
         }        
       } 
-      }
+      },
     },
     mounted() {
     this.getTypes();
     },
+    components: {
+      ModalType,
+      ModalBreed
+    }
   }
 </script>
 <style scoped>

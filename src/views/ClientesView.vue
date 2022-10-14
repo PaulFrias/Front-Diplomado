@@ -3,6 +3,7 @@
     <div v-if="!clientes.length" class="alert alert-info" role="alert">
       No se han agregado clientes
     </div>
+    <ModalCreateClient/>
     <table class="table">
       <thead>
         <tr>
@@ -47,6 +48,7 @@
 
 
 <script>
+import ModalCreateClient from '@/components/ModalCreateClient.vue'
 let login = localStorage.getItem("jwt")  
 export default {
     name: 'app',
@@ -89,6 +91,9 @@ export default {
   mounted() {
     this.getClients();
   },
+  components: {
+      ModalCreateClient
+    }
   }
 
 </script>

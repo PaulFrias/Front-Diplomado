@@ -2,7 +2,7 @@
   <div class="detalleView">
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
-        <h1 class="display-4">Fluid {{$route.params.id}}</h1>
+        <h1 class="display-4"> {{breed.name}}</h1>
         <p class="lead">{{breed.description}}.</p>
       </div>
     </div>
@@ -16,10 +16,12 @@ export default {
         breed: [],
       };
     },
+    props:{
+    },
   methods: {
     async getDetalle() {
       try {
-        const respuesta = await fetch("http://localhost:3000/breed/6",{
+        const respuesta = await fetch("http://localhost:3000/breed/id/" + this.$route.params.id,{
           method: "GET",
           headers: {
             'Content-Type': 'application/json',
