@@ -1,36 +1,36 @@
 <template>
-  <button type="button" class="btn btn-primary"  @click="showClientModal = true">
-    ➕ Agregar Cliente
+  <button type="button" class="btn btn-success"  @click="showPetEditModal = true">
+    ✏️ Editar
   </button>  
-  <div class="modal" tabindex="-1" v-if="showClientModal">
+  <div class="modal" tabindex="-1" v-if="showPetEditModal">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Formulario para agregar cliente</h5>
+          <h5 class="modal-title">Formulario para Editar cliente</h5>
         </div>
         <div class="modal-body">
           <label class="form-label">Tipo de identificacion</label>
-          <input type="text" class="form-control" id="ClientDocumentType" v-model="client.documentType">
+          <input type="text" class="form-control" id="ClientDocumentType" v-model="edit.documentType" > 
         </div>
         <div class="modal-body">
           <label class="form-label">Documento de identificacion</label>
-          <input type="text" class="form-control" id="ClientdocumentId" v-model="client.documentId">
+          <input type="text" class="form-control" id="ClientdocumentId" v-model="edit.documentId">
         </div>
         <div class="modal-body">
           <label class="form-label">Nombre</label>
-          <input type="text" class="form-control" id="ClientName" v-model="client.name">
+          <input type="text" class="form-control" id="ClientName" v-model="edit.name">
         </div>
         <div class="modal-body">
           <label class="form-label">Direccion</label>
-          <input type="text" class="form-control" id="ClientAddress" v-model="client.address">
+          <input type="text" class="form-control" id="ClientAddress" v-model="edit.address">
         </div>
         <div class="modal-body">
           <label class="form-label">Telefono</label>
-          <input type="text" class="form-control" id="ClientPhone" v-model="client.phone">
+          <input type="text" class="form-control" id="ClientPhone" v-model="edit.phone">
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" @click="showClientModal = false">Close</button>
-          <button type="submit" class="btn btn-primary" @click="createClient(client)">💾 Guardar</button>
+          <button type="button" class="btn btn-secondary" @click="showPetEditModal = false">Close</button>
+          <button type="submit" class="btn btn-primary" @click="editClient(edit)">💾 Guardar</button>
         </div>
       </div>
     </div>
@@ -47,24 +47,27 @@ let config = {
   }
 }
 export default {
-  name: 'ModalCreateClient',
+  name: 'ModalEditPet',
+  props:{
+    mascota: {}
+  },
   data() {
     return {
-        showClientModal: false,
-        client: {
-        documentType: '',
-        documentId: '',
-        name: '' ,
-        address: '',
-        phone: ''
+        showPetEditModal: false,
+        edit: {
+        name: this.mascota.name,
+        description: this.mascota.description,
+        image: this.mascota.image,
+        typeId: this.mascota.typeId,
+        breedId: this.mascota.breedId
         }
     }
   },
   methods: {
-     async createClient(client) {   
+     async editClient(pet) {   
       try {
-        await axios.post("http://localhost:3000/client", client, config).then(() => {
-           alert('Especie ' + client.name +' Agregada correctamente');
+        await axios.put("http://localhost:3000/client", pet, config).then(() => {
+           alert('La mascota: ' + pet.name +' modificado correctamente');
         });
        
         } catch (error) {
@@ -116,5 +119,6 @@ export default {
   .modal-dialog-centered{
     width: 60%;
   }
+
 
 </style>

@@ -1,10 +1,10 @@
 <template>
   <div class="mascotasView">
-     <div v-if="!mascotas.length" class="alert alert-info" role="alert">
+    <div v-if="!mascotas.length" class="alert alert-info" role="alert">
       No se han agregado Mascotas
     </div>
     <div class="container my-5">
-      <router-link to="/formCreatePet" class="btn btn-primary">Agregar Mascota</router-link>
+      <router-link to="/formCreatePet" class="btn btn-primary">➕  Agregar Mascota</router-link>
     </div>
     <PetCard :mascotas="mascotas"/>
   </div>

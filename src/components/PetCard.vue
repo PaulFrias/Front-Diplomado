@@ -5,16 +5,17 @@
         <div class="card">
             <img :src='mascota.image' class="img-fluid" :alt="mascota.name">
           <div class="card-body"  >
-            <h5 class="card-title">{{ mascota.name }}</h5>
-            <b class="card-text">{{ mascota.BreedId }}</b>
+            <h5 class="card-title">Nombre: {{ mascota.name }}</h5>
+            <b class="card-text">Raza: {{ mascota.BreedId }}</b>
             <p class="card-text">{{ mascota.description }}</p>
             <div class="row">
               <div class="col">
-                <router-link :to="'/detalle/'+mascota.BreedId" class="btn btn-primary">Detalle</router-link>
+                <router-link :to="'/detalle/'+mascota.BreedId" class="btn btn-primary">🔍 Detalle</router-link>
               </div>
               <div class="col">
+                <ModalEditPet :mascota="mascota"/>
               </div>
-              <div class="col">
+              <div class="col">       
                 <ModalAdoptPet :mascota="mascota"/>
               </div>
             </div>
@@ -27,6 +28,7 @@
 </template>
 
 <script>
+import ModalEditPet from '@/components/ModalEditPet.vue'
 import ModalAdoptPet from '@/components/ModalAdoptPet.vue'
 export default {
   name: 'PetCard',
@@ -39,6 +41,7 @@ export default {
     };
   },
   components: {
+    ModalEditPet,
     ModalAdoptPet
   }
 }

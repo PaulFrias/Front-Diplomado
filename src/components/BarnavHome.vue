@@ -18,7 +18,7 @@
           </li>          
         </ul>        
       </div>
-      <router-link v-if="isLoggin" to="/login" @click="handleLogout" class="nav-link">Salir</router-link>
+      <router-link v-if="isLoggin" to="/login" @click="handleLogout" class="nav-link" >Salir</router-link>
     </div>
   </nav>
 </template>
