@@ -49,14 +49,7 @@ import ModalListPetsByClient from '@/components/ModalListPetsByClient.vue'
 import ModalDetailClient from '@/components/ModalDetailClient.vue'
 import ModalEditClient from '@/components/ModalEditClient.vue'
 import ModalCreateClient from '@/components/ModalCreateClient.vue'
-import axios from "axios";
 let login = localStorage.getItem("jwt"); 
-let config = {
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer '+ login
-  }
-}
 export default {
     name: 'app',
     data() {
@@ -82,11 +75,16 @@ export default {
     },
      async deleteClient(cliente) {
       try {
-        await axios.delete("http://localhost:3000/client/"+ cliente, '', config).then(() => {
-           alert('El cliente eliminado correctamente');
+        await fetch("http://localhost:3000/client/" + cliente, {
+          method: "DELETE",
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer '+ login
+          },
         });
-       
-        } catch (error) {
+        alert('El cliente eliminado correctamente');
+        this.$router.go(0)
+      } catch (error) {
         if(error.code == "ERR_NETWORK"){
           alert("Ocurrio un Error Con el Sistema. Intente Nuevamente")
         }

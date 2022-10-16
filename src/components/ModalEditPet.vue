@@ -75,6 +75,7 @@ export default {
       try {
         await axios.put("http://localhost:3000/pet", pet, config).then(() => {
            alert('La mascota: ' + pet.name +' modificado correctamente');
+           this.$router.go(0)
         });
        
         } catch (error) {
