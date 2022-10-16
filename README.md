@@ -1,5 +1,5 @@
-pets
-Pets Udenar
+# Front Pets
+Diplomado Udenar
 
 Pasos para poner el proyecto en tu local:
 1- npm install}
