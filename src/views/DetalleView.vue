@@ -45,6 +45,7 @@ export default {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 75%;
+  min-height: 705px;
 }
 </style>
 

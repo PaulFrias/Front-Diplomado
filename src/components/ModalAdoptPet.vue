@@ -15,7 +15,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" @click="showModalAdoptPetl = false">Close</button>
-          <button type="submit" class="btn btn-primary" @click="adoptPet(adopt)">💾 Guardar</button>
+          <button class="btn btn-primary" @click="adoptPet(adopt)">💾 Guardar</button>
         </div>
       </div>
     </div>
@@ -50,7 +50,8 @@ export default {
      async adoptPet(adopt) {   
       try {
         await axios.post("http://localhost:3000/pet/adopt", adopt, config).then(() => {
-          alert(this.mascota.name + ' fue adoptado correctamente por ' /*+ this.cliente.name*/);
+          alert(this.mascota.name + ' fue adoptado correctamente');
+          this.$router.go(0)
         });
        
         } catch (error) {

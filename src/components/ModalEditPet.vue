@@ -6,31 +6,35 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Formulario para Editar cliente</h5>
+          <h5 class="modal-title">Formulario para Editar Mascota</h5>
         </div>
         <div class="modal-body">
-          <label class="form-label">Tipo de identificacion</label>
-          <input type="text" class="form-control" id="ClientDocumentType" v-model="edit.documentType" > 
+          <label class="form-label">Bombre</label>
+          <input type="text" class="form-control" id="ClientDocumentType" v-model="edit.name" > 
         </div>
         <div class="modal-body">
-          <label class="form-label">Documento de identificacion</label>
-          <input type="text" class="form-control" id="ClientdocumentId" v-model="edit.documentId">
+          <label class="form-label">Descripcion</label>
+          <input type="text" class="form-control" id="ClientdocumentId" v-model="edit.description">
         </div>
         <div class="modal-body">
-          <label class="form-label">Nombre</label>
-          <input type="text" class="form-control" id="ClientName" v-model="edit.name">
+          <label class="form-label">imagen</label>
+          <input type="text" class="form-control" id="ClientName" v-model="edit.image">
         </div>
         <div class="modal-body">
-          <label class="form-label">Direccion</label>
-          <input type="text" class="form-control" id="ClientAddress" v-model="edit.address">
+          <label class="form-label">Especie</label>
+          <select class="form-select" v-model="edit.typeId" id="typePet" style="width: 80%">
+            <option id="optionTypeValue" v-for="type in types" :key="type.id" :value="type.id"> {{ type.name }} </option>
+          </select>
         </div>
         <div class="modal-body">
-          <label class="form-label">Telefono</label>
-          <input type="text" class="form-control" id="ClientPhone" v-model="edit.phone">
+          <label class="form-label">Raza</label>
+          <select class="form-select" @click="getBreeds(edit.typeId)" id="breedPet" v-model="edit.breedId" style="width: 80%">
+            <option :value="breed.id" v-for="breed in breeds" :key="breed.id"> {{ breed.name }} </option>
+          </select>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" @click="showPetEditModal = false">Close</button>
-          <button type="submit" class="btn btn-primary" @click="editClient(edit)">💾 Guardar</button>
+          <button class="btn btn-primary" @click="editPet(edit)">💾 Guardar</button>
         </div>
       </div>
     </div>
@@ -49,37 +53,55 @@ let config = {
 export default {
   name: 'ModalEditPet',
   props:{
-    mascota: {}
+    mascota: {},
+    types: {}
   },
   data() {
     return {
         showPetEditModal: false,
         edit: {
+        id: this.mascota.id,
         name: this.mascota.name,
         description: this.mascota.description,
         image: this.mascota.image,
         typeId: this.mascota.typeId,
         breedId: this.mascota.breedId
-        }
+        },
+        breeds: []
     }
   },
   methods: {
-     async editClient(pet) {   
+     async editPet(pet) {   
       try {
-        await axios.put("http://localhost:3000/client", pet, config).then(() => {
+        await axios.put("http://localhost:3000/pet", pet, config).then(() => {
            alert('La mascota: ' + pet.name +' modificado correctamente');
         });
        
         } catch (error) {
         if(error.code == "ERR_NETWORK"){
           alert("Ocurrio un Error Con el Sistema. Intente Nuevamente")
+          location. reload()
         }
         else{
           alert(error)        
         }        
       } 
-      }
-  }
+      },
+      async getBreeds(typeid) {
+      try {
+        const respuesta = await fetch("http://localhost:3000/breed/"+typeid, {
+          method: "GET",
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer '+ login
+          },
+        });
+        this.breeds = await respuesta.json();
+        } catch (error) {
+        console.log(error);
+        }
+      },
+  },
 }
 </script>
 

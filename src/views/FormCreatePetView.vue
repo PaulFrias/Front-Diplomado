@@ -18,14 +18,14 @@
         </div>
         <div class="mb-3 form-check">
           <label class="form-label">Especie</label>
-          <select class="form-select" v-model="pet.typeId" id="typePet">
+          <select class="form-select" v-model="pet.typeId" id="typePet" style="width: 80%">
             <option id="optionTypeValue" v-for="type in types" :key="type.id" :value="type.id"> {{ type.name }} </option>
           </select>
           <ModalType />
         </div>
         <div class="mb-3 form-check">
           <label class="form-label">Raza</label>
-          <select class="form-select" @click="getBreeds(pet.typeId)" id="breedPet" v-model="pet.breedId">
+          <select class="form-select" @click="getBreeds(pet.typeId)" id="breedPet" v-model="pet.breedId" style="width: 80%">
             <option :value="breed.id" v-for="breed in breeds" :key="breed.id"> {{ breed.name }} </option>
           </select>
           <ModalBreed :types="types"/>
@@ -126,4 +126,9 @@ let config = {
   }
 </script>
 <style scoped>
+.formCreatePetView{
+  background-color: whitesmoke;
+  background-size: 75%;
+  min-height: 755px;
+}
 </style>

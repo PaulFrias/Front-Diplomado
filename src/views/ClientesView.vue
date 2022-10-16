@@ -10,7 +10,8 @@
           <tr>
             <th>Nombre</th> 
             <th>Documento</th>     
-            <th>Celular</th>        
+            <th>Celular</th>
+            <th>Mascotas</th>          
           </tr>
           
         </thead>
@@ -24,14 +25,14 @@
             </td> 
             <td>
               {{ cliente.phone }}
-            </td>         
+            </td>
+            <td >
+              <ModalListPetsByClient :cliente="cliente.id"/>
+            </td>          
             <td >
               <ModalDetailClient :cliente="cliente"/>
               <ModalEditClient :cliente="cliente"/>
-              <button
-                class="btn btn-danger ml-2"
-                @click="$emit('delete-cliente', cliente.id)"
-              >
+              <button class="btn btn-danger ml-2" @click="deleteClient(cliente.id)">
                 🗑️ Eliminar
               </button>
             </td>
@@ -44,15 +45,24 @@
 
 
 <script>
+import ModalListPetsByClient from '@/components/ModalListPetsByClient.vue'
 import ModalDetailClient from '@/components/ModalDetailClient.vue'
 import ModalEditClient from '@/components/ModalEditClient.vue'
 import ModalCreateClient from '@/components/ModalCreateClient.vue'
-let login = localStorage.getItem("jwt")  
+import axios from "axios";
+let login = localStorage.getItem("jwt"); 
+let config = {
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer '+ login
+  }
+}
 export default {
     name: 'app',
     data() {
       return {
         clientes: [],
+        mascotasByClient: []
       };
     },
   methods: {
@@ -70,6 +80,21 @@ export default {
         console.log(error);
       }
     },
+     async deleteClient(cliente) {
+      try {
+        await axios.delete("http://localhost:3000/client/"+ cliente, '', config).then(() => {
+           alert('El cliente eliminado correctamente');
+        });
+       
+        } catch (error) {
+        if(error.code == "ERR_NETWORK"){
+          alert("Ocurrio un Error Con el Sistema. Intente Nuevamente")
+        }
+        else{
+          alert(error)        
+        }        
+      } 
+    },
   },
   mounted() {
     this.getClients();
@@ -77,7 +102,8 @@ export default {
   components: {
       ModalCreateClient,
       ModalEditClient,
-      ModalDetailClient
+      ModalDetailClient,
+      ModalListPetsByClient
     }
   }
 
@@ -88,5 +114,6 @@ export default {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 75%;
+  min-height: 705px;
 }
 </style>

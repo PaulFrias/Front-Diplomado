@@ -33,7 +33,8 @@
 .infoView{
   background-image: url(../assets/logoTransparente.png);
   background-position: center;
-  background-size: 50%;
+  background-size: 40%;
+  min-height: 705px;
 }
 
 </style>

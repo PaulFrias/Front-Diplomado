@@ -55,6 +55,7 @@ export default {
     return {
         showClientEditModal: false,
         edit: {
+        id: this.cliente.id,
         documentType: this.cliente.documentType,
         documentId: this.cliente.documentId,
         name: this.cliente.name,
