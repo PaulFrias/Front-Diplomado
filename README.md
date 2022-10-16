@@ -1,24 +1,10 @@
-# front-mascotas-taller
+pets
+Pets Udenar
 
-## Project setup
-```
-npm install
-```
+Pasos para poner el proyecto en tu local:
+1- npm install}
+2- npm run serve
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Anotaciones
+1- se debe ejecutar la aplicacion del back alojada en este repositorio https://github.com/JuanChicaiza/pets y seguir sus intruciones para el despliegue
+2- crear un usuario para poder loguearse
