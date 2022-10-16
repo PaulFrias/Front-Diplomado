@@ -74,7 +74,7 @@ export default {
       }
     },
      async deleteClient(cliente) {
-      if(confirm("Do you really want to delete?")){
+      if(confirm("Esta seguro de eliminar este cliente?")){
       try {
         await fetch("http://localhost:3000/client/" + cliente, {
           method: "DELETE",
